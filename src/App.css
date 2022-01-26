@@ -1,0 +1,69 @@
+a {
+  margin: 5px;
+}
+
+main {
+  background-image: url('./images/rick_backgorund.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 100vh;
+  color: #FFF;
+}
+
+nav {
+  padding: 15px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0px 10px 13px -7px rgba(36,255,95,0.75);
+  margin-bottom: 30px;
+}
+
+nav > a {
+  color: #FFF;
+  padding: 10px;
+  text-decoration: none;
+  border-right: 1px solid rgba(36,255,95,0.75);
+}
+
+nav > a:hover {
+  background-color: rgba(36,255,95,0.75);
+}
+
+.listCard {
+  max-width: 60%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card {  
+  border: 1px solid rgba(36,255,95,0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px;
+  padding: 10px;
+  width: 15rem;
+  max-height: 100rem;
+  color: #FFF;
+}
+
+.card:hover {
+  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 34px 5px rgba(36,255,95,0.75);
+}
+
+.card > img {
+  width: 100%;
+  border-radius: 70px;
+}
+
+.character {
+  text-align: center;
+  max-width: 60%;
+}
+
+.character > img {
+  border-radius: 70px;
+}
