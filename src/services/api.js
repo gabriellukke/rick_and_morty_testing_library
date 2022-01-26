@@ -5,4 +5,11 @@ async function fetchAPI(url) {
   return data;
 }
 
-export default fetchAPI;
+const fetchAPISimulate = (url) => new Promise((resolve) => {
+  setTimeout(async () => {
+    const response = await fetchAPI(url);
+    resolve(response)
+  }, 1500)
+})
+
+export default fetchAPISimulate;

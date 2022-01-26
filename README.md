@@ -1,55 +1,33 @@
-# Rick and Morty
+# Rick and Morty React Testing Library
 
 ## O que vamos desenvolver
 ![app](app.gif)
 
-Nesse desafio queremos que você desenvolva a aplicação acima para colocar em prática alguns conceitos de React.
+Nesse desafio queremos que você teste a aplicação acima para colocar em prática alguns conceitos da Biblioteca [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/).
 
 ### Habilidades que queremos praticar
-* Criação de componentes
-* Componentização
-* Passagem de props
-* Roteamento com React Router
-* Requisições de API
+* Utilizar os seletores (queries) da React-Testing-Library em testes automatizados;
+* Simular eventos com a React-Testing-Library em testes automatizados;
+* Testar fluxos lógicos assíncronos com a React-Testing-Library;
 
-Diferente dos primeiros projetos de front que são bem guiados aqui você terá mais libertade para construir sua tela, só teremos alguns pontos que precisam ser seguidos para garantir a expêriencia em desenvolver com React.
+Diferente dos primeiros projetos de front que são bem guiados aqui você terá mais libertade para construir seus testes.
 
 ## Dicas e Avisos
 * Esse desafio tem como objetivo ser executado na mentoria invertida que tem duração de 50 min, se atentem ao tempo que vão demorar para decidir o que fazer.
 
-* Use as imagens de exemplo para se guiar. 
-
 # Requisitos
-### 1. Crie as rotas da aplicação de acordo com o gif
-![req1](req1.gif)
-  - Crie as rotas: `/characters`, `/locations` e `/episodes`
-  - Permita a navegão entre as rotas
+### 1. Verifique se os links de cabaçalho estão corretos
+  - Verifique se no cabeçalho os links `Personagens`, `Locais` e `Episódios` estão presentes
 
-### 2. Use a API para buscar dados dos personagens
-  - Use o endpoint https://rickandmortyapi.com/api/character
-  - Faça o log dos dados retornados da API
+### 2. Verifique se os personagens são renderizados na página de `/characters`
+  - Verique se existem 20 cards de personagens
 
-### 3. Edite o componente `Card` para renderizar os personagens
-  - Cada componente `Card` deve renderizar apenas 1 personagem
-  - Exiba as seguintes propriedades do personagem `name`, `image`, `species` e `status`.
+### 3. Verifique se o `Card` do personagem é renderizado corretamente
+  - Verifique se o card contém as seguintes informações do personagem: `Nome` e `Imagem`
 
+### 4. Verifique se a funcionalidade de `Ver mais` está funcionando
+  - Verifique se ao clicar no botão `Ver mais` as seguintes informações do personagem serão renderizadas na tela: `Gender` e `Location`
+  - Verifique se é possível voltar para a página `/characters` ao clicar no botão `Voltar`
 
-<img src="req3.png" alt="drawing" width="200"/> 
-
-### 4. Renderize todos cards de personagens na rota `/characters` de acordo com o gif
-![req4](req4.gif)
-
-### 5. Edite o componente `Button` para deixar genérico e usar em todos os lugares que precisará de um botão
-  - O botão precisará ser renderizado da seguinte maneira
-  ```html
-  <Button>Texto do botão</Button>
-  ```
-
-### 6. Crie a funcionadade de exibir mais informações de um personagem de acordo com o gif
-![req6](req6.gif)
- - Use rotas dinâmicas
- - Faça uma requisição em \`https://rickandmortyapi.com/api/character/${id}\` para buscar as informações do personagem
- - Exiba as seguintes propriedades do personagem `name`, `image`, `species`, `status`, `type`, `gender` `Origin` e `Location`.
-
-### 7. Crie a funcionalidade de deletar os `Cards` dos personagens de acordo com o gif
-![req7](req7.gif)
+### 5. Verifique se é possível deletar algum card
+  - Verifique se ao clicar no botão `Deletar personagem` o card é retirado da tela

@@ -10,6 +10,7 @@ class Character extends Component {
 
     this.state = {
       character: null,
+      loadingAPI: true,
     };
 
     this.getCharacter = this.getCharacter.bind(this);
@@ -23,12 +24,13 @@ class Character extends Component {
     const { match: { params: { id } } } = this.props;
     const character = await fetchAPI(`${CHARACTERS}/${id}`);
 
-    this.setState({ character });
+    this.setState({ character, loadingAPI: false });
   }
 
   render() {
-    const { character } = this.state;
+    const { character, loadingAPI } = this.state;
     const { history } = this.props;
+    if (loadingAPI) return <h1>Carregando...</h1>;
     return (
       <div className="character">
         {character && (
