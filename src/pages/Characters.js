@@ -1,61 +1,50 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import fetchAPI from '../services/api';
 import { CHARACTERS } from '../services/endpoints';
 
 import Card from '../components/Card';
 
-class Characters extends Component {
-  constructor() {
-    super();
+function Characters() {
+  const [characters, setCharacters] = useState([]);
+  const [loadingAPI, setLoadingAPI] = useState(true);
 
-    this.state = {
-      loadingAPI: true,
-      characters: [],
-    };
+  const history = useHistory();
 
-    this.getCharacters = this.getCharacters.bind(this);
-    this.deleteCharacter = this.deleteCharacter.bind(this);
-  }
+  useEffect(() => {
+    getCharacters();
+  }, []);
 
-  componentDidMount() {
-    this.getCharacters();
-  }
-
-  async getCharacters() {
+  const getCharacters = async () => {
     const { results: characters } = await fetchAPI(CHARACTERS);
 
-    this.setState({ characters, loadingAPI: false });
+    setCharacters(characters);
+    setLoadingAPI(false);
   }
 
-  deleteCharacter(characterToDelete) {
+  const deleteCharacter = (characterToDelete) => {
     function filterComparison(comparison) {
       return comparison.id !== characterToDelete.id;
     }
-
-    this.setState((prevState) => ({
-      characters: prevState.characters.filter(filterComparison),
-    }));
+    setCharacters((prevState) => prevState.filter(filterComparison));
   }
 
-  render() {
-    const { characters, loadingAPI } = this.state;
-    const { history } = this.props;
-    if (loadingAPI) return <h1>Carregando...</h1>;
-    return (
-      <ul className="listCard">
-        {characters.map((character) => (
-          <Card
-            key={ character.id }
-            data={ character }
-            type="character"
-            history={ history }
-            deleteCard={ () => this.deleteCharacter(character) }
-          />
-        ))}
-      </ul>
-    );
-  }
+  if (loadingAPI) return <h1>Carregando...</h1>;
+
+  return (
+    <ul className="listCard">
+      {characters.map((character) => (
+        <Card
+          key={ character.id }
+          data={ character }
+          type="character"
+          history={ history }
+          deleteCard={ () => deleteCharacter(character) }
+        />
+      ))}
+    </ul>
+  );
 }
 
 export default Characters;

@@ -1,44 +1,33 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import fetchAPI from '../services/api';
 import { LOCATIONS } from '../services/endpoints';
 
 import Card from '../components/Card';
 
-class Locations extends Component {
-  constructor() {
-    super();
+function Locations() {
+  const [locations, setLocations] = useState([]);
+  const [loadingAPI, setLoadingAPI] = useState(true);
 
-    this.state = {
-      loadingAPI: true,
-      locations: [],
-    };
+  useEffect(() => {
+    getLocations();
+  }, []);
 
-    this.getLocations = this.getLocations.bind(this);
-  }
-
-  componentDidMount() {
-    this.getLocations();
-  }
-
-  async getLocations() {
+  const getLocations = async () => {
     const { results: locations } = await fetchAPI(LOCATIONS);
 
-    this.setState({ locations, loadingAPI: false });
+    setLocations(locations);
+    setLoadingAPI(false);
   }
 
-  render() {
-    const { locations, loadingAPI } = this.state;
-    console.log(locations);
-    if (loadingAPI) return <h1>Carregando...</h1>;
-    return (
-      <ul className="listCard">
-        {locations.map((location) => (
-          <Card key={ location.id } data={ location } type="location" />
-        ))}
-      </ul>
-    );
-  }
+  if (loadingAPI) return <h1>Carregando...</h1>;
+  return (
+    <ul className="listCard">
+      {locations.map((location) => (
+        <Card key={ location.id } data={ location } type="location" />
+      ))}
+    </ul>
+  );
 }
 
 export default Locations;

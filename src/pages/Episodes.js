@@ -1,44 +1,34 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import fetchAPI from '../services/api';
 import { EPISODES } from '../services/endpoints';
 
 import Card from '../components/Card';
 
-class Episodes extends Component {
-  constructor() {
-    super();
+function Episodes() {
+  const [episodes, setEpisodes] = useState([]);
+  const [loadingAPI, setLoadingAPI] = useState(true);
 
-    this.state = {
-      loadingAPI: true,
-      episodes: [],
-    };
+  useEffect(() => {
+    getEpisodes();
+  }, []);
 
-    this.getEpisodes = this.getEpisodes.bind(this);
-  }
-
-  componentDidMount() {
-    this.getEpisodes();
-  }
-
-  async getEpisodes() {
+  const getEpisodes = async () => {
     const { results: episodes } = await fetchAPI(EPISODES);
 
-    this.setState({ episodes, loadingAPI: false });
+    setEpisodes(episodes);
+    setLoadingAPI(false);
   }
 
-  render() {
-    const { episodes, loadingAPI } = this.state;
-    console.log(episodes);
-    if (loadingAPI) return <h1>Carregando...</h1>;
-    return (
-      <ul className="listCard">
-        {episodes.map((location) => (
-          <Card key={ location.id } data={ location } type="episode" />
-        ))}
-      </ul>
-    );
-  }
+  if (loadingAPI) return <h1>Carregando...</h1>;
+
+  return (
+    <ul className="listCard">
+      {episodes.map((location) => (
+        <Card key={ location.id } data={ location } type="episode" />
+      ))}
+    </ul>
+  );
 }
 
 export default Episodes;
